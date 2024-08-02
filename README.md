@@ -5,9 +5,10 @@ O que motivou meu projeto de Webscraping foi que eu percebi que o conteúdo das 
 
 Após identificar esse GAP e perceber que os dados disponibilizados não me ajudariam da forma que eu queria, resolvi fazer o Webscraping com Python e montar minha própria base de dados, contendo: empresa, reclamação, Tag, localização do reclamante, status, nota da avaliação, resposta do cliente após o atendimento.
 
-Em seguida, utilizei Python para tratar minha base de dados da seguinte forma:
-- Colocar novas Classificações mais específicas em cada reclamação;
-- Identificar palavras mais mencionadas;
-- Analisar a tendência temporal das reclamções.
+Em seguida, utilizei Python para reclassificar as reclamações e montei um dashboard no Power BI para fazer análise das informações.
 
-  Para tornar as informações visuais, utilizei o Power BI para a criação de um dashboard dessas informações e, por fim, esses foram os insights do projeto:
+Como conclusão, percebemos que os principais motivos das reclamações eram falta/demora no atendimento e sobre o processo de cancelamento. Estamos tomando diversa medidas internamento para melhorar nosso processos e evitar recber reclamações desse mesmo tipo.
+
+Por fim, com o intuíto de praticar um pouco mais dos meus conhecimentos de Python, também utilei a base de dados para:
+- Identificar palavras chaves mais mencionadas;
+- Analisar a tendência temporal das reclamções de uma das concorrentes.
