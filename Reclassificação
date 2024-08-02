@@ -1,0 +1,33 @@
+#Tratamento da Base_GIT.py
+
+import pandas as pd
+import re
+from collections import Counter
+
+doc = r'C:\PythonDSA\ALL\Base_RA_Git.xlsx'
+df = pd.read_excel(doc)
+
+#Definindo as novas classificações
+palavras_chaves ={
+    ('atendimento', 'não atende', 'não me atendem', 'não respondem', 'contato', 'Não consigo', 'ninguém responde', 'retorno', 'estou a mais de', 'demora', 'não sou atendido', 'suporte', 'solicitei o cancelamento'):'Atendimento',
+    ('zerada', 'a mais', 'mais cara', 'indevido', 'valor', 'de uma vêz', 'não recebi', 'dobro', 'duas', 'não recebeu', 'paguei mais de uma conta', 'duas contas', 'duas faturas', 'mai de uma fatura', 'mais de um boleto', 'mais de uma conta', 'contas no mesmo mês', 'cobrança indevida', 'cobrança incorreta', 'valor errado', 'desconto errado', 'fatura errada', 'fatura incorreta', 'valor incorreto', 'boleto errado', 'boleto incorreto', 'conta errrada', 'conta incorreta', 'cobrança' 'desconto incorreto', 'estorno', 'corte', 'cortaram', 'corta'):'Problemas na Cobrança',
+    ('pedi o cancelamento', 'multa', 'tentei cancelar', 'tentei fazer o cancelamento', 'tentando cancelar', 'tentando fazer o cancelamento', 'cancelado', 'quero cancelar', 'fiz o cancelamento', 'fizemos o cancelamento', 'pediu o cancelamento', 'solicitando o cancelamento', 'solicitei o distrato', 'já solicitei o cancelamento', 'já fiz o cancelamento', 'rescisão', 'dissolução', 'tentei cancelar', 'tento cancelar', 'não consigo cancelar', 'não cancelam', 'tentam cancelar', 'não conseguem cancelar', 'solicitei o cancelamento', 'colicitei cancelamento', 'realizei o cancelamento', 'solicitado o cancelamento'):'Dificuldades no cancelamento',
+    ('não cumprem', 'não cumpriram', 'promessa', 'prometeram', 'propaganda enganosa', 'enganado', 'mentira'):'Propaganda Enganosa',
+    ('não assinei', 'não tenho contrato', 'não contratei', 'não contrataram', 'não contratou', 'nunca assinei', 'não possuo conta', 'não possuo contrato'):'Problemas na Contratação',
+    ('inasatisfeito', 'não paga', 'não pagam', 'não pagaram', 'insatisfeita', 'não entendo', 'reclamou', 'reclamei', 'não gostei', 'má qualidade', 'processo', 'problemas', 'enganada', 'não contratem', 'nada vantajoso', 'não vale a pena', 'baixo desconto', 'pouco desconto', 'desconto baixo', 'enganado'):'Insatisfação com o Produto'
+}
+
+for tag in palavras_chaves.values():
+    df[tag] = 0  
+
+# Função para atribuir tags em colunas separadas
+def atribuir_novas_tags(row):
+    texto = f"{row['title']} {row['description']}".lower()
+    for palavras, tag in palavras_chaves.items():
+        if any(palavra in texto for palavra in palavras):
+            row[tag] = 1  # 1 =True
+    return row
+
+df = df.apply(atribuir_novas_tags, axis=1)
+
+df.to_excel(doc, index=False)
