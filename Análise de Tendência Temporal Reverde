@@ -1,0 +1,52 @@
+#Análise de Tendência TemporaL RA.py
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+from statsmodels.tsa.holtwinters import SimpleExpSmoothing
+
+#Carregar e tratar arquvivo
+df = pd.read_excel('C:\PythonDSA\RECLAMAÇÕES\REVERDE.xlsx')
+df['data'] = pd.to_datetime(df['created'])
+
+#Criar série temporal
+serie_temporal = df.set_index('data')['description']
+serie_temporal = serie_temporal.resample('M').count()
+#print(serie_temporal.head())
+
+#Gráfico para visualizar a série temporal inicial
+plt.figure(figsize = (12, 6))
+plt.plot(serie_temporal, color = '#FF5246', linewidth = 2)
+plt.gca().set_facecolor('#EDE9E5')
+plt.grid(color = 'black', linestyle = "--", linewidth = 0.5)
+
+plt.xlabel('Mês', color = 'black', fontsize = 10, fontfamily = 'Poppins')
+plt.ylabel('Reclamações', color = 'black', fontsize = 10, fontfamily = 'Poppins')
+plt.title('Série Temporal de Reclamações', color = '#FF5246', fontsize = 15, fontfamily = 'Poppins')
+
+plt.tick_params(axis= 'x', colors = 'black', labelsize=7)
+plt.tick_params(axis= 'y', colors = 'black', labelsize=7)
+
+#plt.show()
+
+#Contrução e Treinamento do Modelo de SUAVIZAÇÃO EXPONENCIAL
+modelo = SimpleExpSmoothing(serie_temporal)
+modelo_ajustado = modelo.fit(smoothing_level= 1)
+
+suavizacao_exponencial = modelo_ajustado.fittedvalues
+
+#Visualizar resultado da suavização
+plt.figure(figsize = (10,5))
+plt.plot(serie_temporal, label = 'Valores Reais')
+plt.gca().set_facecolor('#EDE9E5')
+plt.plot(suavizacao_exponencial, label = 'Valores Previstos', linestyle = '--')
+plt.xlabel('Mês', color = 'black', fontsize = 10, fontfamily = 'Poppins')
+plt.ylabel('Reclamações', color = 'black', fontsize = 10, fontfamily = 'Poppins')
+plt.title('Modelo de Suavização Exponencial', color = '#FF5246', fontsize = 18, fontfamily = 'Poppins')
+
+plt.tick_params(axis= 'x', colors = 'black', labelsize=7)
+plt.tick_params(axis= 'y', colors = 'black', labelsize=7)
+
+plt.legend()
+plt.show()
