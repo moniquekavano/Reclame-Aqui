@@ -1,5 +1,5 @@
 # Reclame-Aqui
-Juntamente com um colega de trabalho, fiz um Webscraping do Reclame Aqui das principais concorrentes da empresa em que trabalho, no intuito de identificar os principais motivos pelos quais elas recebem reclamações e trabalhar nossos processos internos para evitar receber as mesmas reclamações e manter nossa boa reputação na plataforma.
+Fiz um Webscraping do Reclame Aqui das principais concorrentes da empresa em que trabalho, no intuito de identificar os principais motivos pelos quais elas recebem reclamações e trabalhar nossos processos internos para evitar receber as mesmas reclamações e manter nossa boa reputação na plataforma.
 
 O que motivou meu projeto de Webscraping foi que eu percebi que o conteúdo das reclamações não eram 100% compatíveis com as classificações que estavam sendo usadas, o que afetava os dados disponibilizados pelo Reclame Aqui. Por exemplo, cheguei a ver diversas reclamações onde a Tag era "Cobrança Indevida", no entanto, a pessoa estava reclamando sobre a dificuldade no processo de cancelamento.
 
